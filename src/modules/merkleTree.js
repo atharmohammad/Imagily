@@ -1,6 +1,6 @@
-import {sha256} from "js-sha256";
+const sha256 = require('js-sha256')
 
-export class MerkleTree {
+class MerkleTree {
     leaves = []
     
     // constructor to fill up the leaves with hash of the pixel buffers
@@ -12,11 +12,11 @@ export class MerkleTree {
 
     // provides the merkle root hash for a leaves buffer
     static createRootHash(leavesBuffer) {
-        return this.createMerkleTree(leavesBuffer);
+        return MerkleTree.createMerkleTree(leavesBuffer);
     }
 
     // recursively creates the merkle tree and returns the merkle root hash
-    createMerkleTree(leavesBuffer) {
+    static createMerkleTree(leavesBuffer) {
         let size = leavesBuffer.length;
         if(size == 1){
             return leavesBuffer[0];
@@ -27,16 +27,18 @@ export class MerkleTree {
         if(size&1){
             let oddLeavesBuffer = []
             let pairhash = sha256(leavesBuffer[0]+leavesBuffer[1]);
+            // let pairhash = leavesBuffer[0] + leavesBuffer[1];
             oddLeavesBuffer.push(pairhash);
-            oddLeavesBuffer.concat(leavesBuffer.slice(2,-1));
-            start = 2;
-            leavesBuffer = oddLeavesBuffer; 
+            leavesBuffer = oddLeavesBuffer.concat(leavesBuffer.slice(2));
+            // console.log(leavesBuffer)
         }
         let newSize = leavesBuffer.length;
         for(let i = 0; i<newSize; i+=2){
             let pairhash = sha256(leavesBuffer[i] + leavesBuffer[i+1]);
+            // let pairhash = leavesBuffer[i] + leavesBuffer[i+1];
             newLeavesBuffer.push(pairhash);
         }
         return this.createMerkleTree(newLeavesBuffer);
     }
 }
+module.exports = MerkleTree;
