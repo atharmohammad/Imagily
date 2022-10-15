@@ -41,4 +41,4 @@ class MerkleTree {
         return this.createMerkleTree(newLeavesBuffer);
     }
 }
-module.exports = MerkleTree;
+module.exports = MerkleTree; 
