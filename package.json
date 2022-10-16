@@ -4,12 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/main.js"
+    "start": "node src/main.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
+    "jest": "^29.1.2",
+    "js-sha256": "^0.9.0",
+    "supertest": "^6.3.0",
     "yargs": "^17.6.0"
   }
 }
