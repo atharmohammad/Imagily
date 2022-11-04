@@ -36,4 +36,4 @@ const HexAToRGBA = (h) => {
   return pixelValue
 }
 
-export { RGBAToHexA, HexAToRGBA }
+module.exports = { RGBAToHexA, HexAToRGBA }
