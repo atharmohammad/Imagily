@@ -13,7 +13,7 @@ async function ImageToUri(url) {
   ctx.drawImage(base_image, 0, 0)
   var imgData = ctx.getImageData(0, 0, base_image.width, base_image.height)
   var imgPixels = imgData.data
-  console.log(imgPixels)
+  // console.log(imgPixels)
   return {
     imgPixels,
     imageHeight: base_image.height,
@@ -32,7 +32,7 @@ const ConvertArrayToMerkelTreeFormat = async () => {
     const hexVal = RGBAToHexA(arr[i], arr[i + 1], arr[i + 2], arr[i + 3])
     MerkelTreeArray.push(hexVal)
   }
-  console.log(MerkelTreeArray)
+  // console.log(MerkelTreeArray)
   return MerkelTreeArray
 }
 
@@ -43,7 +43,7 @@ const ConvertMerkelTreeArrayToPixelArray = async () => {
     const tempArr = HexAToRGBA(hexArr[i])
     pixelsArray.push(...tempArr)
   }
-  console.log(pixelsArray)
+  // console.log(pixelsArray)
 }
 
 // ConvertMerkelTreeArrayToPixelArray()

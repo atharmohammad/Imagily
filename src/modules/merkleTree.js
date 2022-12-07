@@ -40,5 +40,9 @@ class MerkleTree {
         }
         return this.createMerkleTree(newLeavesBuffer);
     }
+
+    diffTree(leaves1,leaves2){
+           
+    }
 }
 module.exports = MerkleTree; 
