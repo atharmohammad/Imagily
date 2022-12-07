@@ -1,5 +1,6 @@
 import { HexAToRGBA, RGBAToHexA } from './pixelColorTypeConverter.js'
-const path = require('path')
+import LinearCompare from './LinearCompare.js'
+// const path = require('path')
 const { createCanvas, loadImage, Image } = require('canvas')
 
 async function ImageToUri(url) {
@@ -21,10 +22,10 @@ async function ImageToUri(url) {
 }
 
 const ConvertArrayToMerkelTreeFormat = async () => {
-  const image = await ImageToUri('D:/Imagily/Images/car1.jpg')
+  const image = await ImageToUri('D:/projects/Imagily/Images/car1.jpg')
   // path.resolve(__dirname, '../../Images/'),
   // 'car1.jpg'
-  // 'C:/Users/91782/Desktop/Imagily/Images/car1.jpg'
+
   let MerkelTreeArray = []
   const arr = image.imgPixels
   for (let i = 0; i < arr.length; i += 4) {
@@ -45,40 +46,28 @@ const ConvertMerkelTreeArrayToPixelArray = async () => {
   console.log(pixelsArray)
 }
 
-// await ConvertArrayToMerkelTreeFormat(arr)
-ConvertMerkelTreeArrayToPixelArray()
+// ConvertMerkelTreeArrayToPixelArray()
+
+const diff = async () => {
+  const image1 = await ImageToUri('D:/projects/Imagily/Images/car1.jpg')
+  const image2 = await ImageToUri('D:/projects/Imagily/Images/car3.png')
+  const changedValues = await LinearCompare(image1.imgPixels, image2.imgPixels)
+
+  return changedValues
+}
+diff()
 
 const draw = async () => {
   const canvas = createCanvas()
   const ctx = canvas.getContext('2d')
-  // const height = image.imgHeight
-  // const width = image.imgWidth
-  // const arr = image.imgPixels
   const img = new Image()
 
   img.onload = () => ctx.drawImage(img, 0, 0)
   img.onerror = (err) => {
     throw err
   }
-  // img.src = 'C:/Users/91782/Desktop/Imagily/Images/car1.jpg'
-
-  // var imgData = ctx.createImageData(width, height) // width x height
-  // var data = imgData.data
-  // for (var i = 0, len = width * height * 4; i < len; i++) {
-  //   data[i] = arr[i]
-  // }
-  // //   console.log(imgData)
-  // ctx.putImageData(imgData, 0, 0)
 }
 
 draw()
 
-// draw({
-//   imgPixels: [
-//     123, 123, 230, 231, 231, 12, 23, 231, 43, 231, 123, 124, 156, 34, 89, 34,
-//   ],
-//   imgHeight: 4,
-//   imgWidth: 4,
-// })
-
-export { draw, ImageToUri }
+export { draw, ImageToUri, diff }
