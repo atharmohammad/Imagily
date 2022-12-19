@@ -13,12 +13,15 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.10.1",
+    "cors": "^2.8.5",
     "esm": "^3.2.25",
+    "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "jest": "^29.1.2",
     "js-sha256": "^0.9.0",
     "path": "^0.12.7",
     "supertest": "^6.3.0",
     "yargs": "^17.6.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
