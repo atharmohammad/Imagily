@@ -1,5 +1,5 @@
-import { HexAToRGBA, RGBAToHexA } from './pixelColorTypeConverter.js'
-import LinearCompare from './LinearCompare.js'
+const { HexAToRGBA, RGBAToHexA } = require('./pixelColorTypeConverter.js')
+const LinearCompare = require('./LinearCompare.js')
 // const path = require('path')
 const { createCanvas, loadImage, Image } = require('canvas')
 
@@ -49,25 +49,30 @@ const ConvertMerkelTreeArrayToPixelArray = async () => {
 // ConvertMerkelTreeArrayToPixelArray()
 
 const diff = async () => {
-  const image1 = await ImageToUri('D:/projects/Imagily/Images/car1.jpg')
-  const image2 = await ImageToUri('D:/projects/Imagily/Images/car3.png')
-  const changedValues = await LinearCompare(image1.imgPixels, image2.imgPixels)
-
-  return changedValues
-}
-diff()
-
-const draw = async () => {
-  const canvas = createCanvas()
-  const ctx = canvas.getContext('2d')
-  const img = new Image()
-
-  img.onload = () => ctx.drawImage(img, 0, 0)
-  img.onerror = (err) => {
-    throw err
+  try {
+    const image1 = await ImageToUri('D:/projects/Imagily/Images/car1.png')
+    const image2 = await ImageToUri('D:/projects/Imagily/Images/car3.png')
+    const changedValues = await LinearCompare(
+      image1.imgPixels,
+      image2.imgPixels
+    )
+    return { changedValues, image1: image1.imgPixels, image2: image2.imgPixels }
+  } catch (error) {
+    console.log('error')
   }
 }
 
-draw()
+// const draw = async () => {
+//   const canvas = createCanvas()
+//   const ctx = canvas.getContext('2d')
+//   const img = new Image()
 
-export { draw, ImageToUri, diff }
+//   img.onload = () => ctx.drawImage(img, 0, 0)
+//   img.onerror = (err) => {
+//     throw err
+//   }
+// }
+
+// draw()
+
+module.exports = diff
