@@ -45,6 +45,7 @@ const drawImage = async (image) => {
 
 const addEffect = async (changedPixels) => {
   var imageData = context.getImageData(0, 0, canvas.width, canvas.height)
+
   changeToWhite(imageData.data, changedPixels)
   context.putImageData(imageData, 0, 0)
 }

@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/main.js",
     "test": "jest",
-    "dev": "node -r esm src/modules/pixelsManipulation.js"
+    "dev": "node -r esm src/modules/pixelsManipulation.js",
+    "develop":"nodemon src/main.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +20,7 @@
     "fs": "^0.0.1-security",
     "jest": "^29.1.2",
     "js-sha256": "^0.9.0",
+    "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "supertest": "^6.3.0",
     "yargs": "^17.6.0"

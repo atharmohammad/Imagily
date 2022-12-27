@@ -1,5 +1,5 @@
 const { HexAToRGBA, RGBAToHexA } = require('./pixelColorTypeConverter.js')
-const LinearCompare = require('./LinearCompare.js')
+const LinearCompare = require('./linearCompare.js')
 // const path = require('path')
 const { createCanvas, loadImage, Image } = require('canvas')
 
@@ -22,7 +22,9 @@ async function ImageToUri(url) {
 }
 
 const ConvertArrayToMerkelTreeFormat = async () => {
-  const image = await ImageToUri('D:/projects/Imagily/Images/car1.jpg')
+  // const image = await ImageToUri('D:/projects/Imagily/Images/car1.jpg')
+  const image = await ImageToUri('/media/athar/Develop/Project/Imagily/Images/car1.png') 
+  // console.log(image)
   // path.resolve(__dirname, '../../Images/'),
   // 'car1.jpg'
 
@@ -50,15 +52,16 @@ const ConvertMerkelTreeArrayToPixelArray = async () => {
 
 const diff = async () => {
   try {
-    const image1 = await ImageToUri('D:/projects/Imagily/Images/car1.png')
-    const image2 = await ImageToUri('D:/projects/Imagily/Images/car3.png')
+    const image1 = await ImageToUri('/media/athar/Develop/Project/Imagily/Images/car1.png')
+    const image2 = await ImageToUri('/media/athar/Develop/Project/Imagily/Images/car3.png')
     const changedValues = await LinearCompare(
       image1.imgPixels,
       image2.imgPixels
     )
+    // console.log(changedValues)
     return { changedValues, image1: image1.imgPixels, image2: image2.imgPixels }
   } catch (error) {
-    console.log('error')
+    console.log(error)
   }
 }
 
