@@ -1,7 +1,7 @@
 # Imagily
 
 
-# 🔖 About
+## 🔖 About
 Imagily provides a command line interface for users to see the difference between different versions of the image they have been editing
 
 ### How it Works
