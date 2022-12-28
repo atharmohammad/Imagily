@@ -9,7 +9,7 @@ Imagily relies on yargs to build command line interface and merkle tree to compa
 
 ## 🚀 Features
 
-- visualize the difference between two version of the image
+- Visualize the difference between two version of the image
 
 
 
