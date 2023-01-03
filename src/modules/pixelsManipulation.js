@@ -23,11 +23,8 @@ async function ImageToUri(url) {
 
 const ConvertArrayToMerkelTreeFormat = async () => {
   const image = await ImageToUri(
-    path.resolve(__dirname, '../../Images/car1.png')
+    path.resolve(__dirname, './Images/car1.png')
   )
-  // console.log(image)
-
-  // 'car1.jpg'
 
   let MerkelTreeArray = []
   const arr = image.imgPixels
@@ -51,8 +48,8 @@ const ConvertMerkelTreeArrayToPixelArray = async () => {
 
 const diff = async () => {
   try {
-    const path1 = path.resolve(__dirname, '../../Images/car1.png')
-    const path2 = path.resolve(__dirname, '../../Images/car3.png')
+    const path1 = path.resolve(__dirname, './Images/car1.png')
+    const path2 = path.resolve(__dirname, './Images/car3.png')
     const image1 = await ImageToUri(path1)
     const image2 = await ImageToUri(path2)
     const changedValues = await LinearCompare(
