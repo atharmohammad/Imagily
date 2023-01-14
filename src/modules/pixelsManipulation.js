@@ -76,4 +76,4 @@ const diff = async () => {
 
 // draw()
 
-module.exports = diff
+module.exports = {diff,ImageToUri,ConvertArrayToMerkelTreeFormat,ConvertMerkelTreeArrayToPixelArray};
