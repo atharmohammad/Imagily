@@ -7,7 +7,7 @@
     "start": "node src/main.js",
     "test": "jest",
     "dev": "node -r esm src/modules/pixelsManipulation.js",
-    "develop":"nodemon src/main.js"
+    "develop": "nodemon src/main.js"
   },
   "keywords": [],
   "author": "",
@@ -23,7 +23,8 @@
     "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "supertest": "^6.3.0",
-    "yargs": "^17.6.0"
+    "uuid": "^9.0.0",
+    "yargs": "^17.6.2"
   },
   "proxy": "http://localhost:5000"
 }

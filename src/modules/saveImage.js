@@ -1,15 +1,24 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require("path");
 
-const save = async() => {
-    const promise = fs.promises.readFile(path.join('../Imagily/Images/car1.jpg'));
+async function walk(dir) {
+    let files = await fs.readdir(dir);
+    files = await Promise.all(files.map(async file => {
+        const filePath = path.join(dir, file);
+        const stats = await fs.stat(filePath);
+        if (stats.isDirectory()) return walk(filePath);
+        else if(stats.isFile()) return filePath;
+    }));
 
-    Promise.resolve(promise).then(function(buffer){
-        fs.writeFile(path.join("../Imagily/.imagily/car1.jpg"),buffer, (err) => {
-            console.error(err)
-        })
-    });
-    
+    return files.reduce((all, folderContents) => all.concat(folderContents), []);
 }
 
-module.exports = save;
+const getDirectories = async source =>
+  (await fs.readdir(source, { withFileTypes: true }))
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+
+
+module.exports = {
+    walk,getDirectories
+};
