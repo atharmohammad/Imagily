@@ -16,7 +16,49 @@ yargs
 yargs
   .command(
     "commit",
-    "commit",
+    "make commits for the staged files ",
+    "c",
+    {
+      message: {
+        type: "string",
+        demandOption: true,
+        describe: "Contact name",
+        alias:"m"
+      }
+    },
+    function (argv) {
+        console.log(argv.message)
+    }
+  )
+  .example("node $0 commit --message 'athar'");
+
+  
+yargs
+.command(
+  "init",
+  "initialises imagily repositiry",
+  "i",
+  {
+    message: {
+      type: "string",
+      demandOption: true,
+      describe: "Contact name",
+      alias:"m"
+    }
+  },
+  function (argv) {
+      console.log(argv.message)
+  }
+)
+.example("node $0 commit --message 'athar'");
+
+
+
+yargs
+  .command(
+    "add",
+    "add files for staging",
+    "a",
     {
       message: {
         type: "string",
