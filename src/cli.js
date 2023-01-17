@@ -1,80 +1,59 @@
-#!/usr/bin/env node
 const yargs = require("yargs");
+const add = require("./modules/add");
+const {walk} = require("./modules/saveImage");
 
 yargs.usage("\nUsage: $0 [cmd] <args>").alias("h", "help");
 
-yargs
-  .command(
-    "status",
-    "show list of changed files",
-    function (argv) {
-      console.log("files");
-    }
-  )
-  .example("node $0 add --name='John Doe' --phone='0123456789'");
-
-yargs
-  .command(
-    "commit",
-    "make commits for the staged files ",
-    "c",
-    {
-      message: {
-        type: "string",
-        demandOption: true,
-        describe: "Contact name",
-        alias:"m"
-      }
-    },
-    function (argv) {
-        console.log(argv.message)
-    }
-  )
-  .example("node $0 commit --message 'athar'");
-
-  
-yargs
-.command(
-  "init",
-  "initialises imagily repositiry",
-  "i",
-  {
-    message: {
-      type: "string",
-      demandOption: true,
-      describe: "Contact name",
-      alias:"m"
-    }
-  },
-  function (argv) {
-      console.log(argv.message)
-  }
-)
-.example("node $0 commit --message 'athar'");
-
-
-
-yargs
+const argv = yargs
   .command(
     "add",
-    "add files for staging",
-    "a",
+    "Add current directory files to stage",
+    () => {},
+    async function (argv) {
+      console.log("add");
+      const files = await walk('./modules/Images/'); // hardcoded path
+      return await add(files);
+    }
+  ).parse().then(r=>console.log(r))
+
+yargs
+  .command(
+    "search",
+    "Search a contact",
     {
-      message: {
+      name: {
+        describe: "Contact name",
         type: "string",
         demandOption: true,
-        describe: "Contact name",
-        alias:"m"
-      }
+      },
     },
-    function (argv) {
-        console.log(argv.message)
+    function () {
+      console.log("search");
     }
   )
-  .example("node $0 commit --message 'athar'");
+  .example("node $0 search --name='John Doe'");
 
-  console.log(yargs.argv);
+yargs
+  .command(
+    "remove",
+    "Remove a contact",
+    {
+      name: {
+        describe: "Contact name",
+        type: "string",
+        demandOption: true,
+      },
+    },
+    function (argv) {
+      console.log("remove");
+    }
+  )
+  .example("node $0 remove --name='John Doe'");
 
-// ( () => {
-//   console.log(argv.status);
-// })();
+yargs
+  .command("show", "Display all contacts", function () {
+    console.log("show");
+  })
+  .example("node $0 show");
+
+// console.log(yargs.argv);
