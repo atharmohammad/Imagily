@@ -4,7 +4,8 @@ const {walk} = require("./modules/saveImage");
 
 yargs.usage("\nUsage: $0 [cmd] <args>").alias("h", "help");
 
-const argv = yargs
+const argv = new Promise(resolve => resolve(
+  yargs
   .command(
     "add",
     "Add current directory files to stage",
@@ -12,9 +13,14 @@ const argv = yargs
     async function (argv) {
       console.log("add");
       const files = await walk('./modules/Images/'); // hardcoded path
-      return await add(files);
+      console.log(files)
+      await add(files);
     }
-  ).parse().then(r=>console.log(r))
+  ).parse()
+))
+.then((r,e)=>{
+  console.log(r,e);
+})
 
 yargs
   .command(

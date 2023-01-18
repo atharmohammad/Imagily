@@ -4,10 +4,14 @@ const { v4 }  =  require('uuid');
 
 async function add(files) {
     const id = v4();
-    var file = fs.createWriteStream(path.join(`./.imagily/add/`,id));
-    file.on('error', function(err) { /* error handling */ });
-    files.forEach(function(v) { file.write(v + '\n'); });
-    file.end();
+    console.log(id)
+    let str = "";
+    files.map((val,_)=>{
+        str += val;
+        str += '\n';
+    })
+    const s = str.slice(0,-1);
+    await fs.promises.writeFile(path.join(`./.imagily/add/`,id),s);
 }
 
 module.exports = add;
