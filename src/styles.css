@@ -1,0 +1,68 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+.source-image,
+.video-container {
+  height: 400px;
+  width: 1000px;
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 10px;
+}
+
+button {
+  padding: 5px 10px;
+  color: white;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+#PaintButton {
+  background: #2e33ee;
+}
+
+#EffectButton {
+  background: #42eaee;
+}
+
+#PaintButton:hover {
+  background: white;
+  border-color: #2e33ee;
+  color: #2e33ee;
+}
+
+#EffectButton:hover {
+  background: white;
+  border-color: #42eaee;
+  color: #42eaee;
+}

@@ -22,9 +22,7 @@ async function ImageToUri(url) {
 }
 
 const ConvertArrayToMerkelTreeFormat = async () => {
-  const image = await ImageToUri(
-    path.resolve(__dirname, './Images/car1.png')
-  )
+  const image = await ImageToUri(path.resolve(__dirname, './Images/car1.png'))
 
   let MerkelTreeArray = []
   const arr = image.imgPixels
@@ -57,7 +55,13 @@ const diff = async () => {
       image2.imgPixels
     )
     // console.log(changedValues)
-    return { changedValues, image1: image1.imgPixels, image2: image2.imgPixels }
+    return {
+      changedValues,
+      image1: image1.imgPixels,
+      image2: image2.imgPixels,
+      height: image1.imageHeight,
+      width: image1.imageWidth,
+    }
   } catch (error) {
     console.log(error)
   }
@@ -76,4 +80,10 @@ const diff = async () => {
 
 // draw()
 
-module.exports = {diff,ImageToUri,ConvertArrayToMerkelTreeFormat,ConvertMerkelTreeArrayToPixelArray};
+module.exports = {
+  diff,
+  ImageToUri,
+  ConvertArrayToMerkelTreeFormat,
+  ConvertMerkelTreeArrayToPixelArray,
+}
+// module.exports = diff
