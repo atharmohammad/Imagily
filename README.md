@@ -3,6 +3,7 @@
 
 ## 🔖 About
 Imagily provides a command line interface for users to see the difference between different versions of the image they have been editing
+Testing
 
 ### How it Works
 Imagily relies on yargs to build command line interface and merkle tree to compare and store the different versions of the image
