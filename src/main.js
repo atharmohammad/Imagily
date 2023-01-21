@@ -23,23 +23,42 @@ const getImageData = async (req, res) => {
     const lastCommits = lt.lastCommits
     const imagePath1 = lastCommits[0]
     // console.log('image path 1', imagePath1)
-    const imagePath2 = lastCommits[0].split('_').join('/')
-    console.log('imagepath 2', imagePath2)
+    let imagePath2 = lastCommits[0].split('_')
+    let imgPath2 = './'
 
-    const images1 = await fspromises.readFile(path.join(lt.dir, imagePath1))
+    for (let i = 0; i < imagePath2.length - 1; i++) {
+      imgPath2 += imagePath2[i] + '/'
+    }
+
+    imgPath2 = imgPath2.slice(0, -1)
+
+    let last = imagePath2[imagePath2.length - 1]
+    console.log('last', last)
+    let lastArray = last.split('.')
+
+    imgPath2 += '.' + lastArray[0]
+
+    console.log('imagepath 2', imgPath2)
+
+    const images1 = await fspromises.readFile(
+      path.join(lt.dir, imagePath1),
+      'utf8'
+    )
+    const image1Json = JSON.parse(images1)
+    const image1Arr = Object.values(image1Json)
 
     console.log('path 1', path.join(lt.dir, imagePath1))
-    console.log('images', images1.toString())
+    // console.log('images', images1.toString())
     // const imageArray1 = images1.split(/\r?\n/)
 
     // const images2 = await fspromises.readFile(imagePath2, 'utf8')
     // const imageArray2 = images2.split(/\r?\n/)
 
-    const imageInfo = await pixelsManipulation.ImageToUri(`./${imagePath2}`)
-    console.log('image info', imageInfo)
+    const imageInfo = await pixelsManipulation.ImageToUri(`./${imgPath2}`)
+    // console.log('image info', imageInfo)
 
     return res.status(200).json({
-      image1: imageArray1,
+      image1: image1Arr,
       image2: [...imageInfo.imgPixels],
       height: imageInfo.imageHeight,
       width: imageInfo.imageWidth,

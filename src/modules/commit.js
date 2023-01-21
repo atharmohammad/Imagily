@@ -41,19 +41,19 @@ const commit = async () => {
     console.log('file', file)
     // const name = file.split('/').join('_')  // name for Linux
     let name = file.split('\\').join('_') // name for windows
+    let newName = name.split('.').join('_')
+    newName += '.json'
 
     const newPath = file.split('\\').join('/')
     // console.log('new patj', newPath)
 
     // const xt = await fspromises.readFile(`./${newPath}`, 'utf8')
     const xt = await ImageToUri(`./${newPath}`)
+    const xtjson = JSON.stringify(xt.imgPixels)
 
-    console.log('xt', xt.imgPixels)
+    // console.log('xt', xtjson)
 
-    await fspromises.writeFile(
-      path.join(`${commitDir}/${id}`, name),
-      xt.imgPixels
-    )
+    await fspromises.writeFile(path.join(`${commitDir}/${id}`, newName), xtjson)
 
     // const name2 = file
     // const srcPath = "./src/modules/Images"
