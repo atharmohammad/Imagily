@@ -14,4 +14,4 @@ async function add(files) {
     await fs.promises.writeFile(path.join(`./.imagily/add/`,id),s);
 }
 
-module.exports = add;
+module.exports = add; 
