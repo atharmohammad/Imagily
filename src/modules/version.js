@@ -1,9 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 
-const dir = './.imagily';
+let dir = './.imagily';
 
-const init = async()=>{  
+const init = async(Dir)=>{  
+    if(Dir)dir = Dir;
     if(!fs.existsSync(dir)){
         fs.mkdir(dir, { recursive: true }, (err) => {
             if (err) throw err;

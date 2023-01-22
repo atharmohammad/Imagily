@@ -5,8 +5,8 @@ const fspromises = require('fs').promises
 const fs = require('fs')
 const { ImageToUri } = require('./pixelsManipulation')
 
-const addDir = './.imagily/add/'
-const commitDir = './.imagily/commits/'
+let addDir = './.imagily/add/'
+let commitDir = './.imagily/commits/'
 
 const findAddedFiles = async () => {
   let files = await fspromises.readdir(addDir)
@@ -25,7 +25,11 @@ const findAddedFiles = async () => {
   return imageArray
 }
 
-const commit = async () => {
+const commit = async (Dir) => {
+  if(Dir){
+    commitDir = '../.imagily/commits/';
+    addDir = '../.imagily/add/';
+  }
   const id = v4()
   const files = await findAddedFiles()
   await fspromises.mkdir(
@@ -39,36 +43,16 @@ const commit = async () => {
 
   files.map(async (file) => {
     console.log('file', file)
-    // const name = file.split('/').join('_')  // name for Linux
-    let name = file.split('\\').join('_') // name for windows
+    const name = file.split('/').join('_')  // name for Linux
+    // let name = file.split('\\').join('_') // name for windows
     let newName = name.split('.').join('_')
     newName += '.json'
-
     const newPath = file.split('\\').join('/')
     // console.log('new patj', newPath)
-
     // const xt = await fspromises.readFile(`./${newPath}`, 'utf8')
     const xt = await ImageToUri(`./${newPath}`)
     const xtjson = JSON.stringify(xt.imgPixels)
-
-    // console.log('xt', xtjson)
-
     await fspromises.writeFile(path.join(`${commitDir}/${id}`, newName), xtjson)
-
-    // const name2 = file
-    // const srcPath = "./src/modules/Images"
-    // console.log(name)
-    // const xt = await fspromises.readFile(file, 'utf8')
-    // console.log('xt', xt)
-    // var file = fs.createWriteStream(path.join(`${commitDir}/${id}`), xt)
-    // file.on('error', function (err) {
-    //   /* error handling */
-    //   console.log(err)
-    // })
-    // files.forEach(function (v) {
-    //   file.write(v + '\n')
-    // })
-    // file.end()
   })
 }
 
